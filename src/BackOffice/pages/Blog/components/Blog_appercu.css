@@ -1,0 +1,117 @@
+
+.Blogcard {
+    height: 250px;
+    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, .66);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .Blogcard:hover {
+	  box-shadow: 0 34px 32px -33px rgba(0, 0, 0, .18);
+	  transform: translate(0px, -3px);
+  }
+
+  .Blogcard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(-70deg, trasparent 10%, transparent 50%);
+    opacity: 0.07;
+  }
+
+  .blog-img {
+    height: 250px;
+    width: 250px;
+    transition: transform 0.2s ease;
+  }
+
+  .Blogcard:hover .blog-img {
+    transform: scale(1.05) rotate(1deg);
+  }
+  .Blogcard:hover .blog-bar {
+    width: 70px;
+  }
+  .blog-textbox {
+    top: 7%;
+    bottom: 7%;
+    left: 300px;
+    width: calc(100% - 310px);
+    font-size: 17px;
+  }
+
+.blog-textbox::before,
+.blog-textbox::after {
+	content: "";
+	position: absolute;
+	display: block;
+	background: #ff0000bb;
+	background: var(--bg-black-100);
+	top: -20%;
+	left: -85px;
+	height: 140%;
+	width: 60px;
+	transform: rotate(8deg);
+}
+
+.blog-title {
+	font-size: 16px;
+}
+.blog-subtitle {
+	color: var(--skin--color1);
+}
+.blog-bar {
+	left: -2px;
+	width: 50px;
+	height: 5px;
+	margin: 0;
+	border-radius: 5px;
+	background-image: linear-gradient(-70deg, var(--skin--color1), var(--skin--color2));
+	transition: width 0.2s ease;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+.blog-description {
+	z-index: 10;
+	font-size: 12px;
+	color: var(--text-black-900);
+	height: 90px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.blog-tagbox {
+	position: absolute;
+	bottom: 3%;
+	font-size: 14px;
+	cursor: default;
+	user-select: none;
+	pointer-events: none;
+}
+.blog-tag {
+	display: inline-block;
+	color: #777;
+  font-size: 12px;
+	border-radius: 3px 0 0 3px;
+	line-height: 26px;
+	padding: 0 10px 0 23px;
+	position: relative;
+	margin-right: 20px;
+	cursor: default;
+	user-select: none;
+	transition: color 0.2s;
+}
+.blog-tag::before {
+	content: '';
+	position: absolute;
+	border-radius: 10px;
+	box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+	height: 6px;
+	left: 10px;
+	width: 6px;
+	top: 10px;
+}

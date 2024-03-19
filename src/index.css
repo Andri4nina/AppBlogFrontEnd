@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    scroll-behavior: smooth;
+  }
+  
+  *{
+    @apply transition-colors duration-200
+  }
+  
+  body{
+      font-family: poppins, sans-serif;
+      color: var(--text-black-900);
+      position: relative;
+      overflow: auto; 
+      scrollbar-width: thin;
+      scrollbar-color: transparent transparent; 
+      background-color: var(--bg);
+  }
+  
+  :root{
+    --bg-black-900:#f2f2fc  ;
+    --bg-black-100:#fdf9ff ;
+    --bg-black-50:#e8dfec  ;
+    --text-black-900:#302e4d;
+    --text-black-700:#504e70;
+    --text-info:#7d8da1;
+    --bg-light:rgba(132,139,200,0.18);
+    --skin--color1:#4863A0;
+    --skin--color2:#0C2340;
+    --bg :#fff;
+    --trans-02:all ease 0.2s;
+    --trans-03:all ease 0.3s;
+    --trans-04:all ease 0.4s;
+    --trans-05:all ease 0.5s;
+  }
+  
+  body.dark
+  {
+      --bg:#0d1117;
+      --bg-black-900:#151515  ;
+      --bg-black-100:#222222;
+      --bg-black-50:#393939  ;
+      --text-black-900:#FFFFFF;
+      --text-black-700:#E9E9E9;
+      --text-info:#dce1eb;
+      --bg-light:#363949;
+  }
+  
+  .bg-black-900{
+    background: var(--bg-black-900);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .bg-black-100 {
+    background: var(--bg-black-100);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .bg-black-50 {
+    background: var(--bg-black-50);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .text-black-900 {
+    color: var(--text-black-900);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .text-black-700 {
+    color: var(--text-black-700);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .text-info {
+    color: var(--text-info);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .bg-light {
+    background: var(--bg-light);
+    transition: var(--trans-04);
+    -webkit-transition: var(--trans-04);
+    -moz-transition: var(--trans-04);
+    -ms-transition: var(--trans-04);
+    -o-transition: var(--trans-04);
+  }
+  
+  .text-skin-color1 {
+    color: var(--skin--color1);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .text-skin-color2 {
+    color: var(--skin--color2);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .bg-skin-color1 {
+    background: var(--skin--color1);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }
+  
+  .bg-skin-color2 {
+    background: var(--skin--color2);
+    transition: var(--trans-03);
+    -webkit-transition: var(--trans-03);
+    -moz-transition: var(--trans-03);
+    -ms-transition: var(--trans-03);
+    -o-transition: var(--trans-03);
+  }

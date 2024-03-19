@@ -1,0 +1,43 @@
+.prvlg-switcher input{
+    display: none;
+  }
+  
+  .prvlg-switcher label{
+    content: '';
+    cursor: pointer;
+    position: relative;
+    height: 25px;
+    width: 50px;
+    background-color: #a9a9a9;
+    border-radius: 20px;
+    transition: all ease 0.3s ;
+  }
+  
+  .prvlg-switcher label::before{
+    content: '';
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    background-color: #f5f5f5;
+    transition: all ease 0.3s ;
+  }
+  
+  
+  input[type="checkbox"]:checked + label{
+    content: '';
+    background:linear-gradient(to right,var(--skin--color2),var(--skin--color1));
+    transition: all ease 0.3s ;
+  }
+  
+  
+  input[type="checkbox"]:checked + label::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(25px);
+    background-color: #f5f5f5;
+    transition: all ease 0.3s ;
+  }
