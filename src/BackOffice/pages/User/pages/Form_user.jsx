@@ -109,17 +109,13 @@ const Form_user = () => {
         });
     };
     
-    const pdpAdd = () => {
-        // Récupérer le dernier utilisateur créé
+  /*   const pdpAdd = () => {
         axios.get('http://localhost:3000/user/last')
            .then((response) => {
-               // Récupérer l'ID du dernier utilisateur
                const lastUserId = response.data._id;
                console.log('Last User ID:', lastUserId);
-               
-               // Envoi de la requête POST pour télécharger l'image
                const formData = new FormData();
-               formData.append('image', selectedFile); // selectedFile est le fichier image à télécharger
+               formData.append('image', selectedFile);
                
                axios.post(`http://localhost:3000/image/pdp/${lastUserId}`, formData, {
                    headers: {
@@ -128,7 +124,6 @@ const Form_user = () => {
                })
                .then((uploadResponse) => {
                    console.log('Image uploaded successfully:', uploadResponse.data);
-                   // Faire quelque chose après le téléchargement de l'image, si nécessaire
                })
                .catch((uploadError) => {
                    console.error('Error uploading image:', uploadError);
@@ -137,17 +132,21 @@ const Form_user = () => {
            .catch((error) => {
                console.error('Error:', error);
            });
+    } */
+    
+    
+    const pdpAdd=() =>{
+
+      
     }
     
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        
         onAdd(formData);
         pdpAdd();
         resetForm(); 
-        navigate('/Utilisateur');
+        navigate('/back/Utilisateur');
       };
       
       

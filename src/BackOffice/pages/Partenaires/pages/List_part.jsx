@@ -39,7 +39,7 @@ const List_part = () => {
     <Searchbar onSearch={fetchPartenaires}/>
     <div className='mt-5'>
     <div className='grid lg:grid-cols-2 gap-2'>
-      <Link to="/Partenaire/Formulaire"> <Add_partenaire /></Link>
+      <Link to="Formulaire"> <Add_partenaire /></Link>
    
         {loading ? (
             <Box padding='6' boxShadow='lg' bg='white'>

@@ -19,7 +19,6 @@ const Task_list_dash = () => {
         .get(`http://localhost:3000/task/todaytask/alltask`)
         .then((res) => {
           setTask(res.data);
-          console.log(res.data)
         })
         .catch((err) => {
           console.error('Error:', err);

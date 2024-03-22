@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import InputFields from '../../../../components/InputField'
-import { FaPlus, FaTrashAlt } from 'react-icons/fa'
 import { useToast } from '@chakra-ui/react';
-import TextArea from '../../../../components/TextArea';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
+import InputFields from '../../../../components/InputField';
+import TextArea from '../../../../components/TextArea';
 
 
 
@@ -13,6 +14,10 @@ const Form_project = () => {
     const [photos, setPhotos] = useState([]);
     const toast = useToast() 
     const navigate = useNavigate();
+    const [objectives, setObjectives] = useState([]);
+    const [nextId, setNextId] = useState(1);
+
+
     
     const handlePhotoChange = (event) => {
       setFormData({
@@ -61,28 +66,38 @@ const Form_project = () => {
       };
       
       
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        
-        onAdd(formData);
-
-        resetForm(); 
-        navigate('/Project');
-      };
+      const handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+            await onAdd(formData);
+            await getTheLastProjet();
+            const projectId = await getTheLastProjet();
+            for (const objective of objectives) {
+                await addObj(objective.value, projectId); 
+            }
+    
+            resetForm();
+            navigate('/back/Project');
+        } catch (error) {
+            console.error('Error in handleSubmit:', error);
+            // Gérer l'erreur si nécessaire
+        }
+    };
+    
+    
       
       
       
       const onAdd = (formData) => {
         axios.post('http://localhost:3000/projet', formData)
-            .then((res) => {
-                console.log('Response data:', res.data);
+            .then( () => {
                 toast({
                     title: 'Projet ajouté avec succès.',
                     status: 'success',
                     duration: 9000,
                     isClosable: true,
                 });
+
             })
             .catch((err) => {
                 console.error('Error:', err);
@@ -95,14 +110,57 @@ const Form_project = () => {
             });
     };
       
+      const enumObj = () =>{
+        const inputElement = document.querySelector('#objadd');
+        const objective = {
+            id: nextId,
+            value: inputElement.value
+        };
+        setObjectives(prevObjectives => [...prevObjectives, objective]);
+        setNextId(nextId + 1); 
+        inputElement.value = '';
+      } 
       
       
+      const delObj = (id) => {
+        setObjectives(prevObjectives => prevObjectives.filter(obj => obj.id !== id));
+    };
+    
+    
+    useEffect(() => {
+      getTheLastProjet();
+  }, []);
+  
+  const getTheLastProjet = async () => {
+    try {
+        const response = await axios.get(`http://localhost:3000/projet/give/thelastest`);
+        const projectId = response.data._id;
+        return projectId; 
+    } catch (error) {
+        console.error('Error fetching latest project:', error);
+        throw error; // Rejette l'erreur pour propager l'exception
+    }
+};
+
+  
+      const addObj = (objectiveValue, projectId) =>{
+        console.log(projectId);
+        console.log('hi')
+        axios.post('http://localhost:3000/objectif', {
+            libele_obj: objectiveValue,
+            status_obj: "waiting",
+            projId: projectId
+        })
+      }
+      
+     
 
   return (
    <>
+   
           <form onSubmit={handleSubmit}>
        
-            <div className="flex max-w-5xl gap-2">
+            <div className="mx-auto flex max-w-5xl gap-2">
 
                 <div className=" w-1/2 p-5 shadow-lg">
                     <h4 className="mb-5 font-semibold">Un project a realiser ?</h4>
@@ -134,8 +192,34 @@ const Form_project = () => {
 
                     <div className="mb-5 w-full">
                         Les objectifs
-                        <div className=" mb-5 obj_container">
-                          
+                       <div className=" mb-5 obj_container">     
+                            <div className='flex justify-around gap-2 items-center'>
+                                <div className='w-3/4'>
+                                    <input type="text" id='objadd'  className='bg-none outline-none w-full border-b-2 p-5'
+                                    />
+                                </div>
+                                <p className='cursor-pointer p-5 flex justify-center items-center h-auto w-1/4 shadow-xl border' onClick={enumObj}>
+                                    <FaPlus />
+                                </p>
+                            </div>
+                            <ul className='mt-5'>
+                                {objectives.map((objective, index) => (
+                                    <li key={index} className='my-5'>
+                                       <div className='flex justify-around gap-2 items-center'>
+                                            <div className='w-3/4 bg-slate-200 p-5 rounded-lg'>
+                                              <p>{objective.value}</p>
+                                            </div>
+                                            <p className='cursor-pointer p-5 flex justify-center items-center h-auto w-1/4 shadow-xl border'  onClick={() => delObj(objective.id)}>
+                                                <FaMinus />
+                                            </p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                            
+                            
+                      
+                                        
                         </div>
 
                         <div className="mb-5 w-full">

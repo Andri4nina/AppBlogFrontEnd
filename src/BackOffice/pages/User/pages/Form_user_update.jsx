@@ -76,7 +76,7 @@ const Form_user_update = () => {
           .catch((err) => {
               console.error('Error:', err);
           });
-          navigate('/Utilisateur');
+          navigate('/back/Utilisateur');
   };
 
 

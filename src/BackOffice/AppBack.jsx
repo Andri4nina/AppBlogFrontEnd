@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import Sidebar from './components/Sidebar';
@@ -24,18 +26,75 @@ import List_user from './pages/User/pages/List_user';
 import Profil_user from './pages/User/pages/Profil_user';
 import User from './pages/User/User';
 
-
-
-
 const AppBack = () => {
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userData = await fetchUserData();
+      localStorage.setItem('TheUser', JSON.stringify(userData));
+    };
+
+    fetchData();
+  }, []);
+
+  
+  const fetchUserData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`http://localhost:3000/auth/profile/${token}`)  
+      return response.data; 
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la récupération des données de l\'utilisateur:', error);
+      return null;
+    }
+  }; 
+  
+  const [userData, setUserData] = useState(null); 
+
+  useEffect(() => {
+  
+    const userDataFromLocalStorage = localStorage.getItem('TheUser');
+    if (userDataFromLocalStorage) {
+      const userDataObject = JSON.parse(userDataFromLocalStorage); 
+      setUserData(userDataObject); 
+    }
+  }, []);
+  
+  
+  
+  useEffect(() => {
+    if (userData) {
+      LogUser(userData._id);
+    }
+  }, [userData]);
+
+  const LogUser = (userId) => {
+    axios
+      .put(`http://localhost:3000/user/${userId}`, {
+        // Ajoutez ici les données que vous voulez envoyer
+        status: 'online'
+      })
+      .then((res) => {
+        console.log('Response data:', res.data);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+      });
+  };
+
+  
+  
+  
+  
+
   return (
   <>
   
   <Sidebar />
   
    <Routes>
-        <Route path="/" index element={<Dashboard />} />
-        <Route path="/Blog" element={<Blog />}>
+        <Route path="" index element={<Dashboard />} />
+        <Route path="Blog" element={<Blog />}>
         <Route index element={<List_blog />} />
         <Route path="Formulaire" element={<Form_blog />} />  
         <Route path='Edit/:blogId' element={<Form_blog_update />}/>

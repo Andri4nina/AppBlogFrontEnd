@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Project_add from '../components/Project_add'
-import Searchbar from '../../../components/Searchbar'
-import { Link } from 'react-router-dom';
-import Project_card from '../components/Project_card';
-import axios from 'axios';
 import { Box, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import Searchbar from '../../../components/Searchbar';
+import Project_add from '../components/Project_add';
+import Project_card from '../components/Project_card';
+
 const List_project = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,6 @@ const List_project = () => {
       .get(`http://localhost:3000/projet?keyword=${keyword}`)
       .then((res) => {
         setProjects(res.data);
-        console.log(res.data)
         setLoading(false);
       })
       .catch((err) => {
@@ -35,7 +36,7 @@ const List_project = () => {
       <section>
       <Searchbar onSearch={fetchProjects}/>
         <div className='mt-5 grid gap-2 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
-            <Link to="/Project/Formulaire">
+            <Link to="Formulaire">
               <Project_add />
             </Link>
             {loading ? (
@@ -53,8 +54,8 @@ const List_project = () => {
            </Box>
             ) : (
               projects.map(project => (
-                  <Link to={`detail/${project._id}`}>
-                          <Project_card key={project._id} project={project} setProjects={setProjects} />
+                  <Link key={project._id} to={`detail/${project._id}`}>
+                          <Project_card  project={project} setProjects={setProjects} />
                   </Link>
           
               ))

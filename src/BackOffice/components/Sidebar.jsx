@@ -2,7 +2,7 @@ import './Sidebar.css';
 
 import { Avatar } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import tinycolor from 'tinycolor2';
 
 
@@ -70,7 +70,17 @@ const Sidebar = () => {
   }, [themeColor]);
   
 
-  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null); 
+
+  useEffect(() => {
+  
+    const userDataFromLocalStorage = localStorage.getItem('TheUser');
+    if (userDataFromLocalStorage) {
+      const userDataObject = JSON.parse(userDataFromLocalStorage); 
+      setUserData(userDataObject); 
+    }
+  }, []);
+  
 
   
  
@@ -81,7 +91,7 @@ const Sidebar = () => {
           <div className="flex gap-10 justify-center items-center mt-5 mr-5 float-right usercontent">
               <div className=" flex gap-2 justify-center items-center text-sm font-bold ">
                 <div>
-                 
+               {userData ? userData.firstName_user : ''}
                 </div>
                 <div>
                   <div className="bg-green-600 w-3 h-3 rounded-full userstatus"></div>
@@ -90,7 +100,7 @@ const Sidebar = () => {
               </div>
         
               <div className="bg-blue-300 relative w-10 h-10 rounded-full overflow-hidden">
-                <Avatar name='x' className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl '/>
+                <Avatar name={userData ? userData.firstName_user : ''} className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl '/>
               </div>
           </div>
         </nav>
@@ -222,16 +232,6 @@ const Sidebar = () => {
 }
 
 export default Sidebar
-               {/* 
-                
-              
-                
-            
-            </ul>
-        </div>
-    
-      </div>
-    
-    </aside> */}
+
 
 

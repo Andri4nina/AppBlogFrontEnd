@@ -62,7 +62,7 @@ const Form_part = () => {
     e.preventDefault();          
         onAdd(formData);
         resetForm(); 
-        navigate('/Partenaire');
+        navigate('/back/Partenaire');
       };
       
       const toast = useToast() 

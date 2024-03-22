@@ -66,7 +66,7 @@ const handleSubmit = (e) => {
         .catch((err) => {
             console.error('Error:', err);
         });
-        navigate('/');
+        navigate('/back/Blog');
 };
     
 const handleChange = (e) => {

@@ -86,7 +86,7 @@ const Form_part_update = () => {
             .catch((err) => {
                 console.error('Error:', err);
             });
-            navigate('/Partenaire');
+            navigate('/back/Partenaire');
     };
   
         

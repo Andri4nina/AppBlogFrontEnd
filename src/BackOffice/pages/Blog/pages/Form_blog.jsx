@@ -1,6 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaCamera, FaPlus, FaTrashAlt, FaVideo } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -61,6 +61,7 @@ const Form_blog = () => {
       approb_blog: false,
       publish_blog: false,
       date_publi_blog: null,
+      user_id:''
     });
     
     
@@ -75,7 +76,7 @@ const Form_blog = () => {
         status_blog: "",
         approb_blog: false,
         publish_blog: false,
-        date_publi_blog: "",
+        date_publi_blog: "" 
       });
       setSelectedFile(null);
     };
@@ -95,7 +96,7 @@ const Form_blog = () => {
         onAdd(formData);
        
         resetForm(); 
-        navigate('/');
+        navigate('/back/Blog');
       };
       
     
@@ -117,6 +118,27 @@ const Form_blog = () => {
             
           });
       };
+      
+      const [userData, setUserData] = useState(null); 
+
+      useEffect(() => {
+      
+        const userDataFromLocalStorage = localStorage.getItem('TheUser');
+        if (userDataFromLocalStorage) {
+          const userDataObject = JSON.parse(userDataFromLocalStorage); 
+          setUserData(userDataObject); 
+        }
+      }, []);
+    
+    
+      useEffect(() => {
+        if (userData) {
+          setFormData(prevFormData => ({
+            ...prevFormData,
+            user_id: userData._id
+          }));
+        }
+      }, [userData]);
     
   return (
     <>
@@ -218,6 +240,7 @@ const Form_blog = () => {
                     </div>
                         
                     <div className='my-5 flex gap-2 justify-center mr-5'>
+                    <input type="hidden" value={userData ? userData.firstName_user : ''}/>
                       <button className='flex justify-around items-center border-2 border-green-500 text-green-500 px-10 py-2 hover:bg-green-500 hover:text-white transition-colors '>Enregistrer</button>
                       <button className='flex justify-around items-center border-2 border-slate-500 text-slate-500 px-10 py-2 hover:bg-slate-500 hover:text-white transition-colors ' type='reset'>Annuler</button>
                     </div>

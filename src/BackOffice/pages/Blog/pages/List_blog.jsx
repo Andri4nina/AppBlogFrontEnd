@@ -13,6 +13,9 @@ const List_blog = () => {
 
   useEffect(() => {
     fetchBlogs();
+    fetchBlogs();
+    fetchBlogs();
+    fetchBlogs();
   }, []);
 
   const fetchBlogs = (keyword = '') => {
